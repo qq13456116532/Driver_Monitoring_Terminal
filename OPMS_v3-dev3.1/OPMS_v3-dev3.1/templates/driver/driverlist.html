@@ -1,0 +1,755 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load platfom_tags %}
+
+
+{% block base_title %}
+    {{ title }}
+{% endblock base_title %}
+
+
+{% block base_content %}
+
+    <!-- 右边主体 -->
+    <div class="app-content">
+        <div class="app-content-body fade-in-up">
+            <div class="padder" style="padding-top: 10px;">
+
+                <div class="col-md-10" style="padding-left: 0; padding-right: 0;">
+                    <div class="panel panel-default" id="body-content">
+                        <div class="panel-heading">
+                            <div style="display: block; border-left: 5px solid #1c2b36; padding-left: 10px; font-size: 20px; font-weight: bolder; line-height: 25px;color: #1c2b36;">
+                                {{ title }}
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="panel-body" id="table_content">
+                            <a class="btn btn-sm btn-default" data-toggle="modal"
+                               data-target="#AddDriverModal">
+                                <i class="fa fa-plus"></i> 添加驾驶员
+                            </a>
+                            <div class="modal inmodal" id="AddDriverModal" tabindex="-1" role="dialog"
+                                 aria-hidden="true"
+                                 data-backdrop="static">
+                                <div class="modal-dialog" style="width: 450px;">
+                                    <div class="modal-content" style="margin-top: 100px;">
+
+                                        <div class="modal-header"
+                                             style="background-color: #1c2b36; color: white;padding-top: 10px; padding-bottom: 10px;">
+                                            <button type="button" class="close" data-dismiss="modal">
+                                                <i class="icon-close" style="font-size: 18px;"></i>
+                                            </button>
+                                            <h4 class="modal-title">添加驾驶员</h4>
+                                        </div>
+                                        <form method="post" id="id_AddOtherPlatformForm">
+                                            <div class="modal-body" style="height: 110px;">
+                                                <div class="form-group"
+                                                     style="vertical-align: middle;line-height: 34px;padding-bottom: 30px;">
+                                                    <div class="col-md-3">
+                                                        <span style="font-size: 14px;">图片URL：</span>
+                                                    </div>
+                                                    <div class="col-md-9" style="padding: 0;">
+                                                        {#                                                        <input type="text" class="form-control" placeholder="人脸识别图片URL"#}
+                                                        {#                                                               maxlength="255" name="fileInput"#}
+                                                        {#                                                               required="">#}
+                                                        <input id="fileInput" type="file" class="file">
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group"
+                                                     style="vertical-align: middle;line-height: 34px;padding-bottom: 30px;">
+                                                    <div class="col-md-3">
+                                                        <span style="font-size: 14px;">姓名：</span>
+                                                    </div>
+                                                    <div class="col-md-9" style="padding: 0;">
+                                                        <input type="text" class="form-control" placeholder="姓名"
+                                                               maxlength="50" name="name"
+                                                               required="">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-3">
+                                                        <span style="font-size: 14px;">性别：</span>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="gender" value="M">男性
+                                                        </label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="gender" value="F">女性
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group"
+                                                     style="vertical-align: middle;line-height: 34px;padding-bottom: 30px;">
+                                                    <div class="col-md-3">
+                                                        <span style="font-size: 14px;">驾驶证：</span>
+                                                    </div>
+                                                    <div class="col-md-9" style="padding: 0;">
+                                                        <input type="text" class="form-control" placeholder="驾驶证编号"
+                                                               maxlength="200" name="license_number"
+                                                               required="">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group"
+                                                     style="vertical-align: middle;line-height: 34px;padding-bottom: 30px;">
+                                                    <div class="col-md-3">
+                                                        <span style="font-size: 14px;">年龄：</span>
+                                                    </div>
+                                                    <div class="col-md-9" style="padding: 0;">
+                                                        <input type="text" class="form-control" placeholder="年龄"
+                                                               maxlength="200" name="age"
+                                                               required="">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group"
+                                                     style="vertical-align: middle;line-height: 34px;padding-bottom: 30px;">
+                                                    <div class="col-md-3">
+                                                        <span style="font-size: 14px;">驾龄：</span>
+                                                    </div>
+                                                    <div class="col-md-9" style="padding: 0;">
+                                                        <input type="text" class="form-control" placeholder="驾龄"
+                                                               maxlength="200" name="driving_experience"
+                                                               required="">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group"
+                                                     style="vertical-align: middle;line-height: 34px;padding-bottom: 30px;">
+                                                    <div class="col-md-3">
+                                                        <span style="font-size: 14px;">手机号：</span>
+                                                    </div>
+                                                    <div class="col-md-9" style="padding: 0;">
+                                                        <input type="text" class="form-control" placeholder="手机号"
+                                                               maxlength="200" name="phone_number"
+                                                               required="">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group"
+                                                     style="vertical-align: middle;line-height: 34px;padding-bottom: 30px;">
+                                                    <div class="col-md-3">
+                                                        <span style="font-size: 14px;">邮箱：</span>
+                                                    </div>
+                                                    <div class="col-md-9" style="padding: 0;">
+                                                        <input type="text" class="form-control" placeholder="邮箱"
+                                                               maxlength="200" name="email"
+                                                               required="">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                        <div class="modal-footer"
+                                        >
+                                            <a class="btn btn-sm btn-default" data-dismiss="modal">取消</a>
+                                            <a class="btn btn-sm btn-default" id="id_AddOtherPlatformBtn">添加</a>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <script>
+                                $(function () {
+                                    var base64 = ""
+                                    document.getElementById('fileInput').addEventListener('change', function () {
+                                        var reader = new FileReader();
+                                        reader.onloadend = function () {
+                                            console.log('BASE64:', reader.result);
+                                            base64 = reader.result
+                                        }
+                                        base64 = reader.readAsDataURL(this.files[0]);
+                                        console.log('BASE64:', base64)
+                                    });
+                                    // 提交表单
+                                    $('#id_AddOtherPlatformBtn').on('click', function () {
+                                        {#console.log("看一下发送的data： " + $('#id_AddOtherPlatformForm').serialize())#}
+                                        var formData = $('#id_AddOtherPlatformForm').serialize();
+                                        formData += '&fileInput=' + encodeURIComponent(base64);
+                                        $.ajax({
+                                            cache: false,
+                                            type: "POST",
+                                            url: "{% url 'driver:add' %}",
+                                            data: formData,
+                                            async: true,
+                                            beforeSend: function (xhr, settings) {
+                                                xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                                            },
+                                            success: function (data) {
+                                                if (data.status == 'success') {
+                                                    window.location.reload();
+                                                } else if (data.status == 'failed') {
+                                                    window.alert(data.msg);
+                                                }
+                                            }
+                                        });
+
+                                    })
+                                })
+                            </script>
+                            <!-- 列表 -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-striped table-bordered">
+                                        <!-- 标题行 -->
+                                        <thead>
+                                        <tr role="row">
+                                            <th class="text-center" width="150">id</th>
+                                            <th class="text-center" width="150">人脸识别对比照片</th>
+                                            <th class="text-center" width="150">姓名</th>
+                                            <th class="text-center" width="200">性别</th>
+                                            <th class="text-center">驾驶证编号</th>
+                                            <th class="text-center">年龄</th>
+                                            <th class="text-center" width="150">驾龄</th>
+                                            <th class="text-center" width="200">手机号</th>
+                                            <th class="text-center" width="150">邮箱</th>
+                                            <th class="text-center" width="150">疲劳驾驶次数</th>
+                                            <th class="text-center" width="150">危险驾驶次数</th>
+                                            <th class="text-center" width="150">前车碰撞预警次数</th>
+                                            <th class="text-center" width="150">更新时间</th>
+                                            <th class="text-center" width="200">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        {% for each_platform in drivers.object_list %}
+                                            <tr class="gradeX odd" role="row">
+                                                <td class="text-center"
+                                                    style="vertical-align:middle; padding-top: 2px; padding-bottom: 2px;">
+                                                    <p>{{ each_platform.id }}</p>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="vertical-align:middle; padding-top: 2px; padding-bottom: 2px;">
+                                                    <img src="{{ each_platform.photo }}" class="img-circle"
+                                                         style="width: 25px; height: 25px;">
+                                                </td>
+                                                <td class="text-center"
+                                                    style="vertical-align:middle; padding-top: 2px; padding-bottom: 2px;">
+                                                    <p>{{ each_platform.name }}</p>
+                                                </td>
+                                                <td class="text-center" style="vertical-align:middle;">
+                                                    {% if each_platform.gender == 'M' %}
+                                                        男
+                                                    {% elif each_platform.gender == 'F' %}
+                                                        女
+                                                    {% else %}
+                                                        男
+                                                    {% endif %}
+                                                </td>
+                                                <td class="text-center"
+                                                    style="vertical-align:middle;">{{ each_platform.license_number }}
+                                                </td>
+                                                <td class="text-center"
+                                                    style="vertical-align:middle;">{{ each_platform.age }}
+                                                </td>
+                                                <td class="text-center"
+                                                    style="vertical-align:middle;">{{ each_platform.driving_experience }}
+                                                </td>
+                                                <td class="text-center"
+                                                    style="vertical-align:middle;">{{ each_platform.phone_number }}
+                                                </td>
+                                                <td class="text-center"
+                                                    style="vertical-align:middle;">{{ each_platform.email }}
+                                                </td>
+                                                <td class="text-center"
+                                                    style="vertical-align:middle;">{{ each_platform.fatigue_driving_count }}
+                                                </td>
+                                                <td class="text-center"
+                                                    style="vertical-align:middle;">{{ each_platform.dangerous_driving_count }}
+                                                </td>
+                                                <td class="text-center"
+                                                    style="vertical-align:middle;">{{ each_platform.front_collision_warning_count }}
+                                                </td>
+                                                <td class="text-center"
+                                                    style="vertical-align:middle;">{{ each_platform.update_time }}
+                                                </td>
+                                                <td class="text-center" style="vertical-align:middle;">
+                                                    <a class="btn btn-xs" data-toggle="modal"
+                                                       data-target="#EditPlatformUserModal{{ each_platform.id }}"
+                                                       style="background-color: #009688;color: white;">
+                                                        编辑
+                                                    </a>
+                                                    <a class="btn btn-xs" data-toggle="modal"
+                                                       data-target="#DeleteUserModal{{ each_platform.id }}"
+                                                       style="background-color: #f05050;color: white;">
+                                                        删除
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                        {% for each_user in drivers.object_list %}
+                            <div class="modal inmodal" id="DeleteUserModal{{ each_user.id }}" tabindex="-1"
+                                 role="dialog"
+                                 aria-hidden="true"
+                                 data-backdrop="static">
+                                <div class="modal-dialog modal-sm" style="padding-top: 10%;">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header"
+                                             style="background-color: #1c2b36; color: white;padding-top: 10px; padding-bottom: 10px;">
+                                            <button type="button" class="close" data-dismiss="modal">
+                                                <i class="icon-close" style="font-size: 18px;"></i>
+                                            </button>
+                                            <h4 class="modal-title">警告！</h4>
+                                        </div>
+
+                                        <form method="post" id="id_DeleteOsForm{{ each_user.id }}">
+                                            <input type="hidden" name="id" value="{{ each_user.id }}">
+                                            <div class="modal-body">
+                                                <span style="font-size: 16px;color: black;">是否确定删除该记录？</span>
+                                            </div>
+                                        </form>
+
+                                        <div class="modal-footer"
+                                             style="padding: 10px;padding-top: 10px; padding-bottom: 10px;">
+                                            <a class="btn btn-default" data-dismiss="modal" style="padding: 2px 10px;">取消</a>
+                                            <a class="btn btn-default" id="id_DeleteOsBtn{{ each_user.id }}"
+                                               style="padding: 2px 10px;">确定</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 停用服务 -->
+                            <script>
+                                $(function () {
+                                    // 提交表单
+                                    $('#id_DeleteOsBtn{{ each_user.id }}').on('click', function () {
+                                        $.ajax({
+                                            cache: false,
+                                            type: "POST",
+                                            url: "{% url 'driver:delete' %}",
+                                            data: $('#id_DeleteOsForm{{ each_user.id }}').serialize(),
+                                            async: true,
+                                            beforeSend: function (xhr, settings) {
+                                                xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                                            },
+                                            success: function (data) {
+                                                window.location.href = "{% url 'driver:list' %}";
+                                                if (data.status == 'success') {
+                                                    window.location.href = "{% url 'driver:list' %}";
+                                                } else if (data.status == 'failed') {
+                                                    window.alert(data.msg);
+                                                }
+                                            }
+                                        });
+                                    });
+                                })
+                            </script>
+                        {% endfor %}
+                        <!-- 页码 -->
+                        <div class="panel-footer" style="padding-top: 0; padding-bottom: 0;">
+                            <div class="text-center">
+                                <ul class="pagination" style="margin-top: 10px; margin-bottom: 10px;">
+
+                                    <!-- 上一页 -->
+                                    {% if drivers.has_previous %}
+                                        <li><a href="?{{ drivers.previous_page_number.querystring }}">上一页<span
+                                                class="sr-only"></span></a></li>
+                                        <li><a href="?{{ drivers.previous_page_number.querystring }}">&laquo;<span
+                                                class="sr-only"></span></a></li>
+                                    {% endif %}
+
+                                    <!-- 页码 -->
+                                    {% for page in drivers.pages %}
+                                        {% if page %}
+                                            <!-- 当前页 -->
+                                            {% ifequal page drivers.number %}
+                                                <li class="active"><a href="?page={{ page }}">{{ page }}<span
+                                                        class="sr-only">(current)</span></a></li>
+                                                <!-- 其它页 -->
+                                            {% else %}
+                                                <li><a href="?page={{ page }}">{{ page }}<span
+                                                        class="sr-only"></span></a></li>
+                                            {% endifequal %}
+                                            <!-- 省略页 -->
+                                        {% else %}
+                                            <li><a href="">...<span class="sr-only"></span></a></li>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    <!-- 下一页 -->
+                                    {% if drivers.has_next %}
+                                        <li><a href="?{{ drivers.next_page_number.querystring }}">&raquo;<span
+                                                class="sr-only"></span></a></li>
+                                        <li><a href="?{{ drivers.next_page_number.querystring }}">下一页<span
+                                                class="sr-only"></span></a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2" style="padding-left: 10px;padding-right: 0;">
+                    <div class="panel panel-default" id="body-content">
+                        <div class="panel-heading" style="background-color: #1c2b36; color: white;">
+                            查询导出（EXCEL）
+                        </div>
+
+                        <div class="panel-body" id="user_action_record" style="overflow-y: auto;">
+                            <form action="">
+                                <ul class="list-group no-bg no-borders pull-in">
+                                    <!-- 查询条件 -->
+                                    <li class="list-group-item" style="padding-left: 0;padding-right: 0;">
+                                        <form class="form-horizontal" method="get" style="padding-top: 0px;">
+                                            <div class="modal-body" style="padding-top: 0px;">
+
+                                                <div class="form-group" style="padding-top: 5px;">
+                                                    <label>
+                                                        <i class="glyphicon glyphicon-time"></i>&nbsp;&nbsp;最早更新时间
+                                                    </label>
+                                                    <div>
+                                                        <div class="input-group date" id='datetimepicker_search1'>
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </span>
+                                                            <input name="start_time" type="text" class="form-control"
+                                                                   value="
+
+
+                                                                           {% if start_time != '' %}{{ start_time }}{% endif %}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group" style="padding-top: 5px;">
+                                                    <label>
+                                                        <i class="glyphicon glyphicon-time"></i>&nbsp;&nbsp;最晚更新时间
+                                                    </label>
+                                                    <div>
+                                                        <div class="input-group date" id='datetimepicker_search2'>
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </span>
+                                                            <input name="stop_time" type="text" class="form-control"
+                                                                   value="
+
+
+                                                                           {% if stop_time != '' %}{{ stop_time }}{% endif %}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {#                                                <div class="form-group" style="padding-top: 5px;">#}
+                                                {#                                                    <label>#}
+                                                {#                                                        <i class="glyphicon glyphicon-tasks"></i>&nbsp;&nbsp;驾龄选择：#}
+                                                {#                                                    </label>#}
+                                                {#                                                    <div>#}
+                                                {#                                                        <select name="experience"#}
+                                                {#                                                                class="selectpicker form-control" multiple=""#}
+                                                {#                                                                data-live-search="true" style="display: none;">#}
+                                                {#                                                            {% for experience in drivers_experiences %}#}
+                                                {#                                                                <option value="{{ experience }}"#}
+                                                {#                                                                        {% if experience in project_list %}selected{% endif %}>{{ experience }}</option>#}
+                                                {#                                                            {% endfor %}#}
+                                                {#                                                        </select>#}
+                                                {#                                                    </div>#}
+                                                {#                                                </div>#}
+                                                <div class="form-group" style="padding-top: 5px;">
+                                                    <label>
+                                                        <i class="glyphicon glyphicon-tasks"></i>&nbsp;&nbsp;姓名选择：
+                                                    </label>
+                                                    <div>
+                                                        <select name="name"
+                                                                class="selectpicker form-control" multiple=""
+                                                                data-live-search="true" style="display: none;">
+                                                            {% for experience in drivers_names %}
+                                                                <option value="{{ experience }}"
+                                                                        {% if experience in project_list %}selected{% endif %}>{{ experience }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit"
+                                                            formaction="{% url 'driver:list' %}"
+                                                            class="btn btn-sm btn-block" name="action" value="search"
+                                                            style="background-color: #009688;color: white;">搜索记录
+                                                    </button>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <button type="submit"
+                                                            formaction="{% url 'driver:list' %}"
+                                                            name="action" class="btn btn-sm btn-block"
+                                                            value="export_search"
+                                                            style="background-color: #009688;color: white;">条件导出
+                                                    </button>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <button type="submit"
+                                                            formaction="{% url 'driver:list' %}"
+                                                            name="action" class="btn btn-sm btn-block"
+                                                            value="export_all"
+                                                            style="background-color: #009688;color: white;">
+                                                        全部导出
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+{% endblock base_content %}
+
+{% block base_footer_html %}
+    {% for each_platform in drivers.object_list %}
+        <div class="modal inmodal" id="EditPlatformUserModal{{ each_platform.id }}" tabindex="-1" role="dialog"
+             aria-hidden="true"
+             data-backdrop="static">
+            <div class="modal-dialog" style="width: 450px;">
+                <div class="modal-content" style="margin-top: 100px;">
+
+                    <div class="modal-header"
+                         style="background-color: #1c2b36; color: white;padding-top: 10px; padding-bottom: 10px;">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <i class="icon-close" style="font-size: 18px;"></i>
+                        </button>
+                        <h4 class="modal-title">修改</h4>
+                    </div>
+
+                    <form method="post" id="id_EditPlatformUserForm{{ each_platform.id }}">
+                        <div class="modal-body" style="height: 110px;">
+
+                            <input type="hidden" name="id" value="{{ each_platform.id }}">
+
+                            {% Get_Common_PlatForm_Info each_platform.id as infos %}
+
+                            {#                            <input type="hidden" name="car_number" value="{% if infos %}{% for each in infos %}{{ each.id }}{% endfor %}{% else %}{% endif %}">#}
+                            <div class="form-group"
+                                 style="vertical-align: middle;line-height: 34px;padding-bottom: 30px;">
+                                <div class="col-md-3">
+                                    <span style="font-size: 14px;">头像：</span>
+                                </div>
+                                <div class="col-md-9" style="padding: 0;">
+                                    <input id="editavatar" type="file" class="file">
+
+                                </div>
+                            </div>
+                            <div class="form-group"
+                                 style="vertical-align: middle;line-height: 34px;padding-bottom: 30px;">
+                                <div class="col-md-3">
+                                    <span style="font-size: 12px;">姓名：</span>
+                                </div>
+                                <div class="col-md-9" style="padding: 0;">
+                                    <input type="text" class="form-control" placeholder=""
+                                           maxlength="30" name="name" required=""
+                                           value="{{ each_platform.name }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <span style="font-size: 14px;">性别：</span>
+                                </div>
+                                <div class="radio">
+                                    <label class="radio-inline">
+                                        <input {% if each_platform.gender == 'M' %} checked {% endif %} type="radio"
+                                                                                    name="gender" value="M">男性
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input {% if each_platform.gender == 'F' %} checked {% endif %} type="radio"
+                                                                                    name="gender" value="F">女性
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group"
+                                 style="vertical-align: middle;line-height: 34px;padding-bottom: 30px;">
+                                <div class="col-md-3">
+                                    <span style="font-size: 14px;">驾驶证：</span>
+                                </div>
+                                <div class="col-md-9" style="padding: 0;">
+                                    <input type="text" class="form-control" placeholder="驾驶证编号"
+                                           maxlength="200" name="license_number"
+                                           value="{{ each_platform.license_number }}"
+                                           required="">
+                                </div>
+                            </div>
+                            <div class="form-group"
+                                 style="vertical-align: middle;line-height: 34px;padding-bottom: 30px;">
+                                <div class="col-md-3">
+                                    <span style="font-size: 14px;">年龄：</span>
+                                </div>
+                                <div class="col-md-9" style="padding: 0;">
+                                    <input type="text" class="form-control" placeholder="年龄"
+                                           maxlength="200" name="age"
+                                           value="{{ each_platform.age }}"
+                                           required="">
+                                </div>
+                            </div>
+                            <div class="form-group"
+                                 style="vertical-align: middle;line-height: 34px;padding-bottom: 30px;">
+                                <div class="col-md-3">
+                                    <span style="font-size: 14px;">驾龄：</span>
+                                </div>
+                                <div class="col-md-9" style="padding: 0;">
+                                    <input type="text" class="form-control" placeholder="驾龄"
+                                           maxlength="200" name="driving_experience"
+                                           value="{{ each_platform.driving_experience }}"
+                                           required="">
+                                </div>
+                            </div>
+                            <div class="form-group"
+                                 style="vertical-align: middle;line-height: 34px;padding-bottom: 30px;">
+                                <div class="col-md-3">
+                                    <span style="font-size: 14px;">手机号：</span>
+                                </div>
+                                <div class="col-md-9" style="padding: 0;">
+                                    <input type="text" class="form-control" placeholder="手机号"
+                                           maxlength="200" name="phone_number"
+                                           value="{{ each_platform.phone_number }}"
+                                           required="">
+                                </div>
+                            </div>
+                            <div class="form-group"
+                                 style="vertical-align: middle;line-height: 34px;padding-bottom: 30px;">
+                                <div class="col-md-3">
+                                    <span style="font-size: 14px;">邮箱：</span>
+                                </div>
+                                <div class="col-md-9" style="padding: 0;">
+                                    <input type="text" class="form-control" placeholder="邮箱"
+                                           maxlength="200" name="email"
+                                           value="{{ each_platform.email }}"
+                                           required="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="modal-footer" style="padding-right: 15px;padding-top: 10px; padding-bottom: 10px;">
+                        <a class="btn btn-sm btn-default" data-dismiss="modal">取消</a>
+                        <a class="btn btn-sm btn-default" id="id_EditPlatformUserBtn{{ each_platform.id }}">修改</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(function () {
+                var base64 = ""
+                document.getElementById('editavatar').addEventListener('change', function () {
+                    var reader = new FileReader();
+                    reader.onloadend = function () {
+                        console.log('BASE64:', reader.result);
+                        base64 = reader.result
+                    }
+                    base64 = reader.readAsDataURL(this.files[0]);
+                    console.log('BASE64:', base64)
+                });
+                // 提交表单
+                $('#id_EditPlatformUserBtn{{ each_platform.id }}').on('click', function () {
+                    var formData = $('#id_EditPlatformUserForm{{ each_platform.id }}').serialize();
+                    formData += '&fileInput=' + encodeURIComponent(base64);
+                    $.ajax({
+                        cache: false,
+                        type: "POST",
+                        url: "{% url 'driver:edit' %}",
+                        data: formData,
+                        async: true,
+                        beforeSend: function (xhr, settings) {
+                            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                        },
+                        success: function (data) {
+                            if (data.status == 'success') {
+                                window.location.reload();
+                            } else if (data.status == 'failed') {
+                                window.alert(data.msg);
+                            }
+                        }
+                    });
+                });
+            })
+        </script>
+    {% endfor %}
+{% endblock base_footer_html %}
+
+
+{% block base_footer_js %}
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap_date/bootstrap-select.css' %}" type="text/css">
+    <script src="{% static 'plugins/bootstrap_date/bootstrap-select.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap_date/moment-with-locales.min.js' %}"></script>
+    <link href="{% static 'plugins/bootstrap_date/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
+    <script src="{% static 'plugins/bootstrap_date/bootstrap-datetimepicker.min.js' %}"></script>
+
+    <!-- 搜索记录时间选择器 -->
+    <script>
+        $('#datetimepicker_search1').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm',
+            locale: moment.locale('zh-cn')
+        });
+
+        $('#datetimepicker_search2').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm',
+            locale: moment.locale('zh-cn')
+        });
+    </script>
+
+    <!-- 添加记录时间选择器 -->
+    <script>
+        $('#datetimepicker_add1').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm',
+            locale: moment.locale('zh-cn')
+        });
+
+        $('#datetimepicker_add2').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm',
+            locale: moment.locale('zh-cn')
+        });
+    </script>
+
+    <!-- 下拉选择框 -->
+    <script type="text/javascript">
+        $(window).on('load', function () {
+            $('.selectpicker').selectpicker({
+                'selectedText': 'cat'
+            });
+        })
+    </script>
+
+    <!-- 记录详情 -->
+    <script>
+        $(function () {
+            $("[data-toggle='popover']").popover();
+        });
+    </script>
+
+    {% for each_record in records.object_list %}
+        <!-- 搜索记录时间选择器 -->
+        <script>
+            $('#datetimepicker_edit{{ each_record.id }}_1').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm',
+                locale: moment.locale('zh-cn')
+            });
+
+            $('#datetimepicker_edit{{ each_record.id }}_2').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm',
+                locale: moment.locale('zh-cn')
+            });
+        </script>
+    {% endfor %}
+
+{% endblock base_footer_js %}
